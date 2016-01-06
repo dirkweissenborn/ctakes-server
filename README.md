@@ -1,8 +1,8 @@
 Install
 -------
 
-* Clone this repository.
-* Download CTakes binaries
+* Clone this repository and do 'mvn install'.
+* Download CTakes binaries.
 * Copy CTAKES_HOME/resources to root (working) dir
 * Optionally, copy CTAKES_HOME/desc to root (working) dir
 
