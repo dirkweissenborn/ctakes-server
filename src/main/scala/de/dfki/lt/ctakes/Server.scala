@@ -46,7 +46,7 @@ object Server extends SimpleRoutingApp  {
               case t: Throwable => complete(t.getMessage)
             }
           }
-        }
+        } ~
         post {
           entity(as[String]) { (text) =>
             try {
