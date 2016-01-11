@@ -6,6 +6,8 @@ import org.apache.uima.cas._
 import org.apache.uima.jcas.JCas
 import org.apache.uima.jcas.cas._
 import org.apache.uima.util.XMLInputSource
+import spray.http.HttpEntity
+import spray.http.ContentTypes._
 import spray.routing.SimpleRoutingApp
 import spray.json._
 
@@ -39,7 +41,7 @@ object Server extends SimpleRoutingApp  {
               jcas.reset()
               jcas.setDocumentText(text.getOrElse("You have to provide a 'text' as input!"))
               ae.process(jcas)
-              complete(cas2FeatureMap(jcas).prettyPrint)
+              complete(HttpEntity(`application/json`, cas2FeatureMap(jcas).prettyPrint))
             } catch {
               case t: Throwable => complete(t.getMessage)
             }
