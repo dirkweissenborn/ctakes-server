@@ -47,6 +47,18 @@ object Server extends SimpleRoutingApp  {
             }
           }
         }
+        post {
+          entity(as[String]) { (text) =>
+            try {
+              jcas.reset()
+              jcas.setDocumentText(text)
+              ae.process(jcas)
+              complete(HttpEntity(`application/json`, cas2FeatureMap(jcas).prettyPrint))
+            } catch {
+              case t: Throwable => complete(t.getMessage)
+            }
+          }
+        }
       }
     }
   }
