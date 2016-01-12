@@ -32,11 +32,11 @@ YTex Install Notes
 * recommended desc.xml: desc/ctakes-ytex-uima/desc/analysis_engine/AggregatePlaintextUMLSProcessor.xml
 * adapt desc.xml:
     * comment assertion-node, because it requires a different scala version and is therefore not supported: 
-    ```xml
+    ```
     <!--node>AssertionAnnotator</node-->
     ```
     * exchange DictionaryLookupAnnotatorDB location to the following (because it works better):
-    ```xml
+    ```
     <delegateAnalysisEngine key="DictionaryLookupAnnotatorDB">
     			<!--import location="./DictionaryLookupAnnotator.xml" /-->
     			<import location="../../../ctakes-dictionary-lookup-fast/desc/analysis_engine/UmlsLookupAnnotator.xml"/>
