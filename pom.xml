@@ -12,7 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <scala.majorVersion>2.11</scala.majorVersion>
-        <scala.minorVersion>.2</scala.minorVersion>
+        <scala.minorVersion>.7</scala.minorVersion>
         <scalatest.version>2.2.2</scalatest.version>
         <junit.version>4.10</junit.version>
         <ctakes.version>3.2.2</ctakes.version>
@@ -25,10 +25,47 @@
             <version>${ctakes.version}</version>
             <exclusions>
                 <exclusion>
-                    <artifactId>ctakes-resources-lvg2008</artifactId>
                     <groupId>net.sourceforge.ctakesresources</groupId>
+                    <artifactId>ctakes-resources-lvg2008</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.ctakes</groupId>
+            <artifactId>ctakes-ytex</artifactId>
+            <version>${ctakes.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.ctakes</groupId>
+            <artifactId>ctakes-assertion-zoner</artifactId>
+            <version>${ctakes.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.mastif</groupId>
+            <artifactId>mastif-i2b2</artifactId>
+            <version>1.4</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mitre</groupId>
+                    <artifactId>jcarafe-core_2.9.1</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--dependency>
+            <groupId>net.sf.carafe.jcarafe</groupId>
+            <artifactId>jcarafe-core_2.9.1</artifactId>
+            <version>0.9.8.3.RC4</version>
+        </dependency-->
+
+
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
         </dependency>
 
         <dependency>
@@ -74,6 +111,20 @@
             <version>2.3.7</version>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>akka-repo</id>
+            <name>Akka Repository</name>
+            <url>http://repo.akka.io/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>

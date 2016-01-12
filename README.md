@@ -22,3 +22,24 @@ You can then use the REST service via GET requests with parameters "text". E.g.,
 ```bash
 http://localhost:9999/ctakes?text=Pain in the left leg.
 ```
+
+YTex Install Notes
+----------
+
+* Follow YTex installation on [ctakes website](https://cwiki.apache.org/confluence/display/CTAKES/YTEX+Installation)
+    * you do not need to care about optional installation steps
+* requires Java-7
+* recommended desc.xml: desc/ctakes-ytex-uima/desc/analysis_engine/AggregatePlaintextUMLSProcessor.xml
+* adapt desc.xml:
+    * comment assertion-node, because it requires a different scala version and is therefore not supported: 
+    ```xml
+    <!--node>AssertionAnnotator</node-->
+    ```
+    * exchange DictionaryLookupAnnotatorDB location to the following (because it works better):
+    ```xml
+    <delegateAnalysisEngine key="DictionaryLookupAnnotatorDB">
+    			<!--import location="./DictionaryLookupAnnotator.xml" /-->
+    			<import location="../../../ctakes-dictionary-lookup-fast/desc/analysis_engine/UmlsLookupAnnotator.xml"/>
+    </delegateAnalysisEngine>
+    ```
+  

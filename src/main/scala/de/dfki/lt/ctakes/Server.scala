@@ -36,24 +36,24 @@ object Server extends SimpleRoutingApp  {
     startServer(interface = url, port = port) {
       path("ctakes") {
         get {
-          parameters('text ?) { (text) =>
+          parameter('text ?) { text =>
             try {
               jcas.reset()
               jcas.setDocumentText(text.getOrElse("You have to provide a 'text' as input!"))
               ae.process(jcas)
-              complete(HttpEntity(`application/json`, cas2FeatureMap(jcas).prettyPrint))
+              complete(HttpEntity(`application/json`, cas2FeatureMap(jcas).toString()))
             } catch {
               case t: Throwable => complete(t.getMessage)
             }
           }
         } ~
         post {
-          entity(as[String]) { (text) =>
+          entity(as[String]) { text =>
             try {
               jcas.reset()
               jcas.setDocumentText(text)
               ae.process(jcas)
-              complete(HttpEntity(`application/json`, cas2FeatureMap(jcas).prettyPrint))
+              complete(HttpEntity(`application/json`, cas2FeatureMap(jcas).toString()))
             } catch {
               case t: Throwable => complete(t.getMessage)
             }
