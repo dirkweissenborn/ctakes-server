@@ -1,11 +1,13 @@
 package de.dfki.lt.ctakes
 
 import akka.actor.ActorSystem
+import com.typesafe.config.ConfigFactory
 import org.apache.uima.UIMAFramework
 import org.apache.uima.cas._
 import org.apache.uima.jcas.JCas
 import org.apache.uima.jcas.cas._
 import org.apache.uima.util.XMLInputSource
+import spray.can.server.ServerSettings
 import spray.http.HttpEntity
 import spray.http.ContentTypes._
 import spray.routing.SimpleRoutingApp
@@ -33,7 +35,12 @@ object Server extends SimpleRoutingApp  {
     val ae = UIMAFramework.produceAnalysisEngine(specifier)
     val jcas = ae.newJCas()
 
-    startServer(interface = url, port = port) {
+    val conf = ConfigFactory
+      .parseString("""spray.can.server { registration-timeout=infinite }""")
+      .withFallback(ConfigFactory.defaultReference())
+    val settings = ServerSettings.fromSubConfig(conf.getConfig("spray.can.server"))
+
+    startServer(interface = url, port = port, settings = Some(settings)) {
       path("ctakes") {
         get {
           parameter('text ?) { text =>
